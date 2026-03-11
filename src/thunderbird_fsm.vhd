@@ -111,14 +111,20 @@ begin
 -- OUTPUT LOGIC ------------------------------------------------
 
 -- LEFT LIGHTS
+--L1--
 o_lights_L(2) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND f_Q(1) AND f_Q(0));
+--L2--
 o_lights_L(1) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND f_Q(1) AND not f_Q(0)) OR (f_Q(2) AND f_Q(1) AND f_Q(0));
+--L3--
 o_lights_L(0) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND f_Q(1) AND not f_Q(0)) OR (f_Q(2) AND f_Q(1) AND f_Q(0));
 
 
 -- RIGHT LIGHTS
+--R1--
 o_lights_R(2) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND not f_Q(1) AND not f_Q(0));
+--R2--
 o_lights_R(1) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND f_Q(0))OR (f_Q(2) AND not f_Q(1) AND not f_Q(0));
+--R3--
 o_lights_R(0) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND not f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND f_Q(0))OR ( f_Q(2) AND not f_Q(1) AND not f_Q(0));
     ---------------------------------------------------------------------------------
 	
