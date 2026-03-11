@@ -131,7 +131,7 @@ begin
 	  wait for k_clk_period *3;
 	  
 	   assert w_leftlights= "000" report "state 011: left lights incorrect" severity failure;
-	   assert w_rightlights= "110" report "state 011: right lights incorrect" severity failure;
+	   assert w_rightlights= "011" report "state 011: right lights incorrect" severity failure;
 	   
 	 wait for k_clk_period *3;
 	 
