@@ -117,9 +117,9 @@ o_lights_L(2) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND not f_Q(1
 
 
 -- RIGHT LIGHTS
-o_lights_R(0) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND not f_Q(1) AND not f_Q(0));
+o_lights_R(2) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND not f_Q(1) AND not f_Q(0));
 o_lights_R(1) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND f_Q(0))OR (f_Q(2) AND not f_Q(1) AND not f_Q(0));
-o_lights_R(2) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND not f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND f_Q(0))OR ( f_Q(2) AND not f_Q(1) AND not f_Q(0));
+o_lights_R(0) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND not f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND f_Q(0))OR ( f_Q(2) AND not f_Q(1) AND not f_Q(0));
     ---------------------------------------------------------------------------------
 	
 	-- PROCESSES --------------------------------------------------------------------
