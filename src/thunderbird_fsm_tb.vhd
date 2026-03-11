@@ -46,66 +46,120 @@
 --|    s_<signal name>          = state name
 --|
 --+----------------------------------------------------------------------------
---library ieee;
---  use ieee.std_logic_1164.all;
---  use ieee.numeric_std.all;
+library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
   
---entity thunderbird_fsm_tb is
---end thunderbird_fsm_tb;
+entity thunderbird_fsm_tb is
+end thunderbird_fsm_tb;
 
---architecture test_bench of thunderbird_fsm_tb is 
+architecture test_bench of thunderbird_fsm_tb is 
 	
---	component thunderbird_fsm is 
---		port (
---        i_clk, i_reset  : in    std_logic;
---        i_left, i_right : in    std_logic;
---        o_lights_L      : out   std_logic_vector(2 downto 0);
---        o_lights_R      : out   std_logic_vector(2 downto 0)
---    );
---	end component thunderbird_fsm;
+	component thunderbird_fsm is 
+		port (
+        i_clk, i_reset  : in    std_logic;
+        i_left, i_right : in    std_logic;
+        o_lights_L      : out   std_logic_vector(2 downto 0);
+        o_lights_R      : out   std_logic_vector(2 downto 0)
+    );
+	end component thunderbird_fsm;
 
---	-- test I/O signals
---	signal w_left : std_logic := '0';
---	signal w_right : std_logic := '0';
---	signal w_reset : std_logic := '0';
---	signal w_clk : std_logic := '0';
+	-- test I/O signals
+	signal w_left : std_logic := '0';
+	signal w_right : std_logic := '0';
+	signal w_reset : std_logic := '0';
+	signal w_clk : std_logic := '0';
 	
---	signal w_leftlights : std_logic_vector(2 downto 0) := "000";
---	signal w_rightlights : std_logic_vector(2 downto 0) := "000";
---	-- constants
+	signal w_leftlights : std_logic_vector(2 downto 0) := "000";
+	signal w_rightlights : std_logic_vector(2 downto 0) := "000";
+	-- constants
 	
---	-- Clock period definitions
---	constant k_clk_period : time := 10 ns;
+	-- Clock period definitions
+	constant k_clk_period : time := 10 ns;
 	
---begin
---	-- PORT MAPS ----------------------------------------
---	uut: thunderbird_fsm port map (
---          i_left => w_left,
---          i_right => w_right,
---          i_reset => w_reset,
---          i_clk => w_clk,
---          o_lights_L(2) => w_leftlights(2),
---          o_lights_L(1) => w_leftlights(1),
---          o_lights_L(0) => w_leftlights(0),
---          o_lights_R(2) => w_rightlights(2),
---          o_lights_R(1) => w_rightlights(1),
---          o_lights_R(0) => w_rightlights(0)
---        );
---	-----------------------------------------------------
+begin
+	-- PORT MAPS ----------------------------------------
+	uut: thunderbird_fsm port map (
+          i_left => w_left,
+          i_right => w_right,
+          i_reset => w_reset,
+          i_clk => w_clk,
+          o_lights_L(2) => w_leftlights(2),
+          o_lights_L(1) => w_leftlights(1),
+          o_lights_L(0) => w_leftlights(0),
+          o_lights_R(2) => w_rightlights(2),
+          o_lights_R(1) => w_rightlights(1),
+          o_lights_R(0) => w_rightlights(0)
+        );
+	-----------------------------------------------------
 	
---	-- PROCESSES ----------------------------------------	
---    -- Clock process ------------------------------------
---    clk_proc : process
---	begin
---		w_clk <= '0';
---        wait for k_clk_period/2;
---		w_clk <= '1';
---		wait for k_clk_period/2;
---	end process;
---	-----------------------------------------------------
+	-- PROCESSES ----------------------------------------	
+    -- Clock process ------------------------------------
+    clk_proc : process
+	begin
+		w_clk <= '0';
+        wait for k_clk_period/2;
+		w_clk <= '1';
+		wait for k_clk_period/2;
+	end process;
+	-----------------------------------------------------
 	
---	-- Test Plan Process --------------------------------
+	-- Test Plan Process --------------------------------
+	sim_proc: process 
+	begin
+	w_reset <= '1';
+        wait for k_clk_period*2;
+        assert w_leftlights = "000" report "bad reset" severity failure;
+		assert w_rightlights = "000" report "bad reset" severity failure;
+    w_reset <= '0';
+        wait for k_clk_period*2;
+        
+        
+	--both switches off--
+	w_left <= '0'; w_right <= '0'; wait for k_clk_period*3;
+	   assert w_leftlights= "000" report "should be off when left and right blinker off" severity failure;
+	   assert w_rightlights= "000" report "should be off when left and right blinker off" severity failure;
+    --both switches on--
+    w_left <= '1'; w_right <= '1'; wait for k_clk_period*3;
+	   assert w_leftlights= "111" report "should be off when left and right blinker off" severity failure;
+	   assert w_rightlights= "111" report "should be off when left and right blinker off" severity failure;
+	--right blinker--
+	w_left <= '0'; w_right <= '1'; wait for k_clk_period*3;
+	   assert w_leftlights= "000" report "state 010: left lights incorrect" severity failure;
+	   assert w_rightlights= "100" report "state 010: right lights incorrect" severity failure;
+	  
+	  wait for k_clk_period *3;
+	  
+	   assert w_leftlights= "000" report "state 011: left lights incorrect" severity failure;
+	   assert w_rightlights= "110" report "state 011: right lights incorrect" severity failure;
+	   
+	 wait for k_clk_period *3;
+	 
+	   assert w_leftlights= "000" report "state 100: left lights incorrect" severity failure;
+	   assert w_rightlights= "111" report "state 100: right lights incorrect" severity failure;
+	 
+	 wait for k_clk_period *3;
+	 
+	 --left blinker--
+	 w_left <= '1'; w_right <= '0'; wait for k_clk_period*3;
+	   assert w_leftlights= "001" report "state 101: left lights incorrect" severity failure;
+	   assert w_rightlights= "000" report "state 101: right lights incorrect" severity failure;
+	  
+	  wait for k_clk_period *3;
+	 
+	w_left <= '1'; w_right <= '0'; wait for k_clk_period*3;
+	   assert w_leftlights= "011" report "state 110: left lights incorrect" severity failure;
+	   assert w_rightlights= "000" report "state 110: right lights incorrect" severity failure;
+	  
+	  wait for k_clk_period *3;
+	  
+    w_left <= '1'; w_right <= '0'; wait for k_clk_period*3;
+	   assert w_leftlights= "111" report "state 111: left lights incorrect" severity failure;
+	   assert w_rightlights= "000" report "state 111: right lights incorrect" severity failure;
+	  
+	  wait;
+	  end process;
+	  
+	-----------------------------------------------------	
 	
---	-----------------------------------------------------	
-	
---end test_bench;
+end;
