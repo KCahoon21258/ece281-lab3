@@ -1,5 +1,4 @@
---+----------------------------------------------------------------------------
---| 
+
 --| COPYRIGHT 2017 United States Air Force Academy All rights reserved.
 --| 
 --| United States Air Force Academy     __  _______ ___    _________ 
@@ -47,38 +46,66 @@
 --|    s_<signal name>          = state name
 --|
 --+----------------------------------------------------------------------------
-library ieee;
-  use ieee.std_logic_1164.all;
-  use ieee.numeric_std.all;
+--library ieee;
+--  use ieee.std_logic_1164.all;
+--  use ieee.numeric_std.all;
   
-entity thunderbird_fsm_tb is
-end thunderbird_fsm_tb;
+--entity thunderbird_fsm_tb is
+--end thunderbird_fsm_tb;
 
-architecture test_bench of thunderbird_fsm_tb is 
+--architecture test_bench of thunderbird_fsm_tb is 
 	
-	component thunderbird_fsm is 
---	  port(
-		
---	  );
-	end component thunderbird_fsm;
+--	component thunderbird_fsm is 
+--		port (
+--        i_clk, i_reset  : in    std_logic;
+--        i_left, i_right : in    std_logic;
+--        o_lights_L      : out   std_logic_vector(2 downto 0);
+--        o_lights_R      : out   std_logic_vector(2 downto 0)
+--    );
+--	end component thunderbird_fsm;
 
-	-- test I/O signals
+--	-- test I/O signals
+--	signal w_left : std_logic := '0';
+--	signal w_right : std_logic := '0';
+--	signal w_reset : std_logic := '0';
+--	signal w_clk : std_logic := '0';
 	
-	-- constants
+--	signal w_leftlights : std_logic_vector(2 downto 0) := "000";
+--	signal w_rightlights : std_logic_vector(2 downto 0) := "000";
+--	-- constants
 	
+--	-- Clock period definitions
+--	constant k_clk_period : time := 10 ns;
 	
-begin
-	-- PORT MAPS ----------------------------------------
+--begin
+--	-- PORT MAPS ----------------------------------------
+--	uut: thunderbird_fsm port map (
+--          i_left => w_left,
+--          i_right => w_right,
+--          i_reset => w_reset,
+--          i_clk => w_clk,
+--          o_lights_L(2) => w_leftlights(2),
+--          o_lights_L(1) => w_leftlights(1),
+--          o_lights_L(0) => w_leftlights(0),
+--          o_lights_R(2) => w_rightlights(2),
+--          o_lights_R(1) => w_rightlights(1),
+--          o_lights_R(0) => w_rightlights(0)
+--        );
+--	-----------------------------------------------------
 	
-	-----------------------------------------------------
+--	-- PROCESSES ----------------------------------------	
+--    -- Clock process ------------------------------------
+--    clk_proc : process
+--	begin
+--		w_clk <= '0';
+--        wait for k_clk_period/2;
+--		w_clk <= '1';
+--		wait for k_clk_period/2;
+--	end process;
+--	-----------------------------------------------------
 	
-	-- PROCESSES ----------------------------------------	
-    -- Clock process ------------------------------------
-    
-	-----------------------------------------------------
+--	-- Test Plan Process --------------------------------
 	
-	-- Test Plan Process --------------------------------
+--	-----------------------------------------------------	
 	
-	-----------------------------------------------------	
-	
-end test_bench;
+--end test_bench;
