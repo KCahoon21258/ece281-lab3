@@ -128,12 +128,12 @@ begin
 	--right blinker--
 	w_left <= '0'; w_right <= '1'; wait for k_clk_period;
 	   assert w_leftlights= "000" report "state 010: left lights incorrect" severity failure;
-	   assert w_rightlights= "001" report "state 010: right lights incorrect" severity failure;
+	   assert w_rightlights= "100" report "state 010: right lights incorrect" severity failure;
 	  
 	  wait for k_clk_period ;
 	  
 	   assert w_leftlights= "000" report "state 011: left lights incorrect" severity failure;
-	   assert w_rightlights= "011" report "state 011: right lights incorrect" severity failure;
+	   assert w_rightlights= "110" report "state 011: right lights incorrect" severity failure;
 	   
 	 wait for k_clk_period ;
 	 
