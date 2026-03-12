@@ -120,11 +120,11 @@ o_lights_L(0) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND not f_Q(1
 
 
 -- RIGHT LIGHTS
---R1--
+--R1(RC)--
 o_lights_R(2) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (f_Q(2) AND not f_Q(1) AND not f_Q(0));
---R2--
+--R2(RB)--
 o_lights_R(1) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND f_Q(0))OR (f_Q(2) AND not f_Q(1) AND not f_Q(0));
---R3--
+--R3(RA)--
 o_lights_R(0) <= (not f_Q(2) AND not f_Q(1) AND f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND not f_Q(0)) OR (not f_Q(2) AND f_Q(1) AND f_Q(0))OR ( f_Q(2) AND not f_Q(1) AND not f_Q(0));
     ---------------------------------------------------------------------------------
 	
