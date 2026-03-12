@@ -87,8 +87,11 @@ begin
           o_lights_L(2) => w_leftlights(2),
           o_lights_L(1) => w_leftlights(1),
           o_lights_L(0) => w_leftlights(0),
+          --RC--
           o_lights_R(2) => w_rightlights(2),
+          --RB--
           o_lights_R(1) => w_rightlights(1),
+          --RA--
           o_lights_R(0) => w_rightlights(0)
         );
 	-----------------------------------------------------
@@ -111,6 +114,7 @@ begin
         wait for k_clk_period*1;
         assert w_leftlights = "000" report "bad reset" severity failure;
 		assert w_rightlights = "000" report "bad reset" severity failure;
+    
     w_reset <= '0';
         wait for k_clk_period*1;
         
@@ -128,12 +132,12 @@ begin
 	--right blinker--
 	w_left <= '0'; w_right <= '1'; wait for k_clk_period;
 	   assert w_leftlights= "000" report "state 010: left lights incorrect" severity failure;
-	   assert w_rightlights= "100" report "state 010: right lights incorrect" severity failure;
+	   assert w_rightlights= "001" report "state 010: right lights incorrect" severity failure;
 	  
 	  wait for k_clk_period ;
 	  
 	   assert w_leftlights= "000" report "state 011: left lights incorrect" severity failure;
-	   assert w_rightlights= "110" report "state 011: right lights incorrect" severity failure;
+	   assert w_rightlights= "011" report "state 011: right lights incorrect" severity failure;
 	   
 	 wait for k_clk_period ;
 	 
