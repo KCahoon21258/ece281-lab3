@@ -107,29 +107,26 @@ begin
 	-- Test Plan Process --------------------------------
 	sim_proc: process 
 	begin
-	
-    w_left  <= '0';
-    w_right <= '0';
-
-    w_reset <= '1';
-    wait for k_clk_period*2;
-
-    assert w_leftlights = "000" report "bad reset" severity failure;
-    assert w_rightlights = "000" report "bad reset" severity failure;
-
+	w_reset <= '1';
+        wait for k_clk_period*1;
+        assert w_leftlights = "000" report "bad reset" severity failure;
+		assert w_rightlights = "000" report "bad reset" severity failure;
     w_reset <= '0';
-    wait for k_clk_period*2;
-
-    --both switches off--
-    wait for k_clk_period*2;
+        wait for k_clk_period*1;
+        
+        
+	--both switches off--
+	w_left <= '0'; w_right <= '0'; wait for k_clk_period;
 	   assert w_leftlights= "000" report "should be off when left and right blinker off" severity failure;
 	   assert w_rightlights= "000" report "should be off when left and right blinker off" severity failure;
+    
     --both switches on--
-    w_left <= '1'; w_right <= '1'; wait for k_clk_period*2;
+    w_left <= '1'; w_right <= '1'; wait for k_clk_period;
 	   assert w_leftlights= "111" report "should be off when left and right blinker off" severity failure;
 	   assert w_rightlights= "111" report "should be off when left and right blinker off" severity failure;
+	
 	--right blinker--
-	w_left <= '0'; w_right <= '1'; wait for k_clk_period*2;
+	w_left <= '0'; w_right <= '1'; wait for k_clk_period;
 	   assert w_leftlights= "000" report "state 010: left lights incorrect" severity failure;
 	   assert w_rightlights= "001" report "state 010: right lights incorrect" severity failure;
 	  
@@ -146,7 +143,7 @@ begin
 	 wait for k_clk_period ;
 	 
 	 --left blinker--
-	 w_left <= '1'; w_right <= '0'; wait for k_clk_period*2;
+	 w_left <= '1'; w_right <= '0'; wait for k_clk_period;
 	   assert w_leftlights= "001" report "state 101: left lights incorrect" severity failure;
 	   assert w_rightlights= "000" report "state 101: right lights incorrect" severity failure;
 	  
@@ -167,4 +164,4 @@ begin
 	  
 	-----------------------------------------------------	
 	
-end;
+end test_bench;
