@@ -107,16 +107,21 @@ begin
 	-- Test Plan Process --------------------------------
 	sim_proc: process 
 	begin
-	w_reset <= '1';
-        wait for k_clk_period*2;
-        assert w_leftlights = "000" report "bad reset" severity failure;
-		assert w_rightlights = "000" report "bad reset" severity failure;
+	
+    w_left  <= '0';
+    w_right <= '0';
+
+    w_reset <= '1';
+    wait for k_clk_period*2;
+
+    assert w_leftlights = "000" report "bad reset" severity failure;
+    assert w_rightlights = "000" report "bad reset" severity failure;
+
     w_reset <= '0';
-        wait for k_clk_period*2;
-        
-        
-	--both switches off--
-	w_left <= '0'; w_right <= '0'; wait for k_clk_period*2;
+    wait for k_clk_period*2;
+
+    --both switches off--
+    wait for k_clk_period*2;
 	   assert w_leftlights= "000" report "should be off when left and right blinker off" severity failure;
 	   assert w_rightlights= "000" report "should be off when left and right blinker off" severity failure;
     --both switches on--
@@ -162,4 +167,4 @@ begin
 	  
 	-----------------------------------------------------	
 	
-end test_bench;
+end;
