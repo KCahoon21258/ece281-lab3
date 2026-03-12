@@ -129,6 +129,12 @@ begin
 	   assert w_leftlights= "111" report "should be off when left and right blinker off" severity failure;
 	   assert w_rightlights= "111" report "should be off when left and right blinker off" severity failure;
 	
+	wait for k_clk_period ;
+	
+	   assert w_leftlights= "000" report "should be off when left and right blinker off" severity failure;
+	   assert w_rightlights= "000" report "should be off when left and right blinker off" severity failure;
+    
+	
 	--right blinker--
 	w_left <= '0'; w_right <= '1'; wait for k_clk_period;
 	   assert w_leftlights= "000" report "state 010: left lights incorrect" severity failure;
@@ -145,7 +151,9 @@ begin
 	   assert w_rightlights= "111" report "state 100: right lights incorrect" severity failure;
 	 
 	 wait for k_clk_period ;
-	 
+	   assert w_leftlights= "000" report "should be off when left and right blinker off" severity failure;
+	   assert w_rightlights= "000" report "should be off when left and right blinker off" severity failure;
+    
 	 --left blinker--
 	 w_left <= '1'; w_right <= '0'; wait for k_clk_period;
 	   assert w_leftlights= "001" report "state 101: left lights incorrect" severity failure;
@@ -163,6 +171,10 @@ begin
 	   assert w_leftlights= "111" report "state 111: left lights incorrect" severity failure;
 	   assert w_rightlights= "000" report "state 111: right lights incorrect" severity failure;
 	  
+	  wait for k_clk_period; 
+	  assert w_leftlights= "000" report "should be off when left and right blinker off" severity failure;
+	  assert w_rightlights= "000" report "should be off when left and right blinker off" severity failure;
+    
 	  wait;
 	  end process;
 	  
